@@ -7,6 +7,7 @@ from todo.models import Todo
 @admin.register(Todo)
 class TodoAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "__str__",
         "created_at",
         "updated_at"
