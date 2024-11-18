@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from urllib import response
+from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from django.conf import settings
 
@@ -34,7 +34,7 @@ class CustomPageNumberPagination(PageNumberPagination):
         except:
             next_page_number = None
 
-        return response(
+        return Response(
             OrderedDict(
                 [
                     ("data", data),
