@@ -8,8 +8,8 @@ from todo.serializers import TodoSerializer
 
 # Create your views here.
 def todo_list(request):
-    return HttpResponse("투두 리스트")
-    #return render(request, "todo/list.html")
+    #return HttpResponse("투두 리스트")
+    return render(request, "todo/index.html")
 
 
 class TodoGenericsListAPI(generics.ListAPIView):
