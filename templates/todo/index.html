@@ -1,15 +1,72 @@
-<h1>안녕하세요</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        
+        //$(document).ready(function(){
 
-{% if user.is_authenticated %}
-<p>인증된 사용자..{{user.username}}</p>
-<p>닉네임..{{user.nickname}}</p>
-{% comment %} <a href="/auth/logout">로그아웃</a> {% endcomment %}
+            const  getList = () => {
+        
+                $.ajax({
+                    type: 'GET',
+                    url: '/todo/viewsets/',
+                    contentType: 'application/json; charset=utf-8',            
+                }).done(function ({data}) {
+                    
+                    document.write
 
-<form method="POST" action="/auth/logout/">
-    {% csrf_token %}
-    <input class="btn btn-primary" type="submit" value="로그아웃" />
-</form>
+                    $(data).each(function(index, item){
+                        console.log(item.user)
+                        console.log(item)
+                        //document.write(item.name + item.user  );
+                    })
+                    console.log(data)
+                }).fail(function (error) {
+                    console.log(error)
+                }).always(function() {
+                    // 작업 완료 후 처리
+                });
 
-{% else %} 
-    <a href="/auth/login">로그인</a> 
-{% endif %}
+            }           
+
+        //});
+  
+    </script>
+
+
+    </head>
+
+    <h1>안녕하세요</h1>
+
+    {% if user.is_authenticated %}
+    <p>인증된 사용자..{{user.username}}</p>
+    <p>닉네임..{{user.nickname}}</p>
+
+
+    <hr/>
+            
+    <hr>
+    <form action="/auth/logout/" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="로그아웃" />
+    </form>
+    <hr />
+
+    {% comment %} http://127.0.0.1:8000/todo/ {% endcomment %}
+    <form action="/todo/viewsets/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" />
+        <input type="text" name="description" />
+
+        <input class="btn btn-primary" type="submit" value="보내기" />
+    </form>
+
+    <hr />
+
+    {% else %}
+    <a href="/auth/login">로그인</a>
+    {% endif %}
+</html>
