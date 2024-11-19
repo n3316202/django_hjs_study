@@ -1,8 +1,10 @@
 from django.contrib import admin
 
-from todo.models import Todo
+from todo.models import Profile, Todo
+from django.contrib.auth.models import User
 
 # Register your models here.
+admin.site.register(Profile)
 
 @admin.register(Todo)
 class TodoAdmin(admin.ModelAdmin):

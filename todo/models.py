@@ -1,6 +1,30 @@
 from pyexpat import model
 from django.db import models
 from django.forms import DateField
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+#User 객체가 생성될 때 같이 연결된 사용자 모델이 같이 생성되게 하는 방법이다. 
+#기존 User 모델에 손상주지 않으면서 새 필드들을 추가할 수 있다.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
 
 # Create your models here.
 class Todo(models.Model):
