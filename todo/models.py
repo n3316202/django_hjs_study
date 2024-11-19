@@ -1,4 +1,6 @@
 from pyexpat import model
+import time
+from typing import Iterable
 from django.db import models
 from django.forms import DateField
 
@@ -22,6 +24,8 @@ class User(AbstractUser):
 
 # Create your models here.
 class Todo(models.Model):
+    #user.todos 이런식으로 가능 -> Todo.objects.filter(user=user)
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name="todos")
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True) 
     complete = models.BooleanField(default=False)
@@ -33,6 +37,16 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args,**kwargs):
+        
+        if self.complete and self.complete_at is None:
+            self.complete_at = time.now()
+        
+        if not self.complete and self.complete_at is not None:
+            self.complete_at = None
+
+        return super().save()
     
 #10. null=True 와 blank=True 의 차이가 무엇인가요?
 #null 과 blank 는 둘 다 기본값이 False 입니다. 이 두 설정은 모두 필드(열) 수준에서 동작합니다. 
