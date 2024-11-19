@@ -5,6 +5,7 @@ from rest_framework import generics,viewsets
 from todo.models import Todo
 from todo.serializers import TodoSerializer
 
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 def todo_list(request):
@@ -23,6 +24,15 @@ class TodoRetrieveUpdateDestroyAPI(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TodoSerializer
 
 
+#함수에서는 @permission_classes 데코레이터 형식으로 호출
+# from rest_framework.decorators import permission_classes
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def example_view(request, format=None)
+#     content = {'status' : 'request was permitted'}
+#     returnn Response(content)
+
 class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
+    queryset = Todo.objects.all().order_by("-created_at") #앞에 - 내림차순 없으면 오름차순
     serializer_class = TodoSerializer
+    permission_classes = [IsAuthenticated] # 로그인 된 유저만 해당 View 를 호출 할수 있음
