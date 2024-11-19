@@ -2,6 +2,8 @@
 
 {% if user.is_authenticated %}
 <p>인증된 사용자..{{user.username}}</p>
+<p>위치..{{user.profile.location}}</p>
+<p>생일..{{user.profile.birth_date}}</p>
 {% comment %} <a href="/auth/logout">로그아웃</a> {% endcomment %}
 
 <form method="POST" action="/auth/logout/">

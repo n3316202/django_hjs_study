@@ -2,13 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import generics,viewsets
 
+from todo.forms import UserForm
 from todo.models import Todo
 from todo.serializers import TodoSerializer
 
 
 # Create your views here.
 def todo_list(request):
-    #return HttpResponse("투두 리스트")
+
     return render(request, "todo/index.html")
 
 
