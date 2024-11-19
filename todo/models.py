@@ -6,11 +6,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    nickname = models.CharField(max_length=20)
-    birth_at = models.DateTimeField()
+    nickname = models.CharField(max_length=20,null=True,blank=True)
+    birth_at = models.DateTimeField(null=True,blank=True)
     
-    def __str__(self):
-        return self.nickname
+    #def __str__(self):
+    #    return self.id
     
 
 
