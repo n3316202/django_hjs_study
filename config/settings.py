@@ -143,12 +143,15 @@ REST_FRAMEWORK = {
     )
 }
 
+#ROTATE_REFRESH_TOKENS : True로 설정하면 TokenRefreshView 에 refresh token 이 제출되면 새 access token과 함께 새 refresh token이 반환됨
+#BLACKLIST_AFTER_ROTATION : True로 설정하면 Blacklist 앱이 사용 중이고 ROTATE_REFRESH_TOKENS 설정이 True로 설정된 경우 TokenRefreshView에 제출 된 refresh token이 블랙리스트에 추가됨
+
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": False,
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
 
     "ALGORITHM": "HS256",
