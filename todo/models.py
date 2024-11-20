@@ -1,23 +1,5 @@
-from pyexpat import model
 from django.db import models
-from django.forms import DateField
-
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-class User(AbstractUser):
-    nickname = models.CharField(max_length=20,null=True,blank=True)
-    birth_at = models.DateTimeField(null=True,blank=True)
-    gender = models.CharField(
-            max_length=1,
-            choices=(
-                ('f', 'female'),
-                ('m', 'male'),
-            ),null=True,blank=True)
-    
-    #def __str__(self):
-    #    return self.id
-    
 
 
 # Create your models here.

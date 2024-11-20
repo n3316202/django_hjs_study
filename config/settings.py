@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 
 CUSTOM_APPS = [
     'todo',
+    'users'
 ]
 
 THIRD_PARTY_APPS = [
@@ -129,7 +130,9 @@ REST_FRAMEWORK = {
 LOGIN_REDIRECT_URL = '/todo/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
 
-#
-AUTH_USER_MODEL = "todo.User"
+
+#AUTH_USER_MODEL = "todo.User"
+AUTH_USER_MODEL = "users.User"
+
 #AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]
 
