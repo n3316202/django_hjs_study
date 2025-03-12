@@ -16,8 +16,6 @@ class Command(BaseCommand):
                 print(f"{i}번째 todo 생성 완료")
             else:
                 print(f"{i}번째 todo 이미 존재")
-        
+
         sys.stdout.write(self.style.SUCCESS("make todo end :)"))
         print(todo)
-
-        
